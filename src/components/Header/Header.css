@@ -1,0 +1,105 @@
+.header-one,
+.header-two{
+   display: flex;
+   margin-bottom: 2%
+}
+
+.header-one hr{
+    border : 1px solid black !important;
+    opacity: 1;
+    margin: 2%;
+}
+.header-one{
+    width:50%
+}
+
+.strength-filter,
+.gender-filter,
+.stat-filter{
+    margin: 0px 21px 0;
+}
+
+.header-one p{
+    padding: 2% 0;
+}
+
+.search-container input,
+#strength-button,
+#gender-button,
+#stat-button{
+    border: none;
+    background-color: #C9DDE2;
+}
+
+.search-container input{
+    width: 450px ;
+    padding: 3%;
+    margin-top: 3%;
+}
+
+.header-two-right{
+    display: flex;
+}
+
+#strength-button,
+#stat-button,
+#gender-button{
+    background-color: #C9DDE2;
+    padding: 6%;
+    width: 194px;
+    margin-top: 7%;
+    border: none;
+}
+
+
+#strength-content li{
+    list-style: none;
+    padding: 2%;
+    border-bottom: 1px dashed;
+}
+
+#strength-content li:last-child{
+    border-bottom: none;
+}
+
+#strength-content ul{
+    padding: 2%;
+    margin: 0;
+}
+
+#strength-content{
+    margin: 5px 0;
+    display: none;
+    z-index: 1;
+    width: 194px;
+    overflow: auto;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+@media only screen and (max-width: 600px) {
+   .header-one{
+      width:100%;
+      display: block;
+   }
+
+   .strength-filter,
+   .gender-filter,
+   .stat-filter,
+   .search-container label{
+    display: none;
+   }
+
+   .search-container input{
+     width: 350px;
+    margin-bottom: 30px;
+   }
+
+   .card{
+     width:158px;
+   }
+}

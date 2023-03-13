@@ -1,0 +1,191 @@
+#card {
+    border: 1px dashed !important;
+    width: 172px;
+    margin-right: 21px;
+    margin-bottom: 21px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+#card a {
+    text-decoration: none;
+    color: black;
+}
+
+.modal-content {
+    background-color: #DEEDED !important;
+}
+
+.stat-container {
+    background-color: #B0D2D2 !important;
+    padding: 20px;
+    margin: 30px 0px;
+}
+
+.modal-header-title {
+    display: flex;
+}
+
+.modal-header-title h2 {
+    font-size: 26px;
+}
+
+.modal-header-title hr {
+    border: 1px solid black !important;
+    opacity: 1;
+    margin: 0 5%;
+    height:36px;
+}
+
+.modal-header-title button{
+   border: 1px solid #2E3156;
+   background-color: #DEEDED;
+   border-radius: 50%;
+   width:30px;
+   height:30px;
+   margin-right:20px;
+}
+
+.header-button{
+    position: absolute;
+    right:30px;
+}
+
+.modal-body {
+    margin: 0px !important;
+}
+
+.modal-container {
+    padding: 25px!important;
+}
+
+.stat-container li {
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    width: 50%;
+    padding-right: 20px;
+}
+
+.modal-header .btn-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 40px !important;
+}
+
+.stat-container ul {
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.attribute-container {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+}
+
+.attribute-container li{
+    list-style: none;
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.attribute-container p{
+  margin-top: 1rem
+}
+
+
+.bar-stat {
+    width: 100%;
+    background-color: #93B2B2;
+}
+
+.stats {
+    background-color: #2E3156;
+    color: white;
+    text-align: center;
+}
+
+.hp-stats,
+.defense-stats {
+    width: 78%;
+}
+
+.attack-stats {
+    width: 84%
+}
+
+.spattack-stats {
+    width: 100%
+}
+
+.def-stats {
+    width: 85%
+}
+
+.speed-stats {
+    width: 100%
+}
+
+.weak-against span {
+    list-style: none;
+    padding: 1%;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #2E3156;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+
+.types span {
+    padding: 0px 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #2E3156;
+    border-radius: 5px;
+}
+
+.modal-header {
+    border: none !important;
+}
+
+.headerLeft-component img {
+    padding: 30px 25px;
+}
+
+.description {
+    border-radius: 4px;
+    height: 62%;
+    width: 100%;
+    padding: 5% 0% ;
+}
+
+.description span{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    text-align: justify;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .headerLeft-component,
+    .modal-container {
+        padding: 0;
+    }
+
+    .modal-header {
+        display: block !important;
+    }
+
+    .attribute-container {
+        display: flex;
+
+    }
+}
