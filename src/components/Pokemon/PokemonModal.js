@@ -3,9 +3,12 @@ import './style.css';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import '../../App.css';
 import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState} from "react";
+import Progress from "./Progress";
+import EvolutionCard from "./EvolutionCard";
 
 const PokemonModal = ({
+  pokemon,
   name,
   id,
   image,
@@ -13,16 +16,26 @@ const PokemonModal = ({
   weight,
   abilities,
   types,
-  close
+  close,
+  stats,
+  statsName
 }) => {
   const [description, setDescription] = useState([]);
   const [eggGroups, setEggGroups] = useState([]);
+  const [weakList, setWeakList] = useState([]);
+  const [evolutionSpecies, setEvolutionSpecies] = useState([]);
+ const [evolutionChainURL, setEvolutionChainURL] = useState("");
 
   useEffect(() => {
     fetchDetails();
+    fetchWeakList();
   }, []);
 
-  // flavot text
+  useEffect(() => {
+    fetchEvolutionDetails();
+  }, [evolutionChainURL]);
+
+  // flavor text
   const modifyDescription = (result) => {
     const englishDesc = result
       .filter((el) => el?.language?.name === "en")
@@ -36,29 +49,62 @@ const PokemonModal = ({
   // fetching API data from pokemon-species
   const fetchDetails = () => {
     axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
-      //setEvolutionChainURL(res.data.evolution_chain.url);
-      setDescription(modifyDescription(res.data.flavor_text_entries));
-      setEggGroups(res.data.egg_groups);
+            setEvolutionChainURL(res.data.evolution_chain.url);
+            setDescription(modifyDescription(res.data.flavor_text_entries));
+            setEggGroups(res.data.egg_groups);
     });
   };
+
+  //fetching weaklist from API
+  const fetchWeakList = () => {
+    axios
+      .get(`https://pokeapi.co/api/v2/type/${id}`)
+      .then((res) =>
+        setWeakList(res?.data.damage_relations?.double_damage_from)
+      );
+  };
+
+  //fetching evolutionspecies 
+
+  const fetchEvolutionDetails = () => {
+    axios.get(`${evolutionChainURL}`).then((res) => {
+      setEvolutionSpecies(assignEvolutionSpecies(res));
+    });
+  };
+ 
+  const assignEvolutionSpecies = (res) => {
+    const arr = [];
+    arr.push(res?.data?.chain?.species);
+    arr.push(res?.data?.chain?.evolves_to[0].species);
+    arr.push(res?.data?.chain?.evolves_to[0].evolves_to[0].species);
+    return arr;
+  };
+
 
   return (
     <div className="modal-container">
       <Modal.Header className="modal-head">
-        <div className="headerLeft-component">
+        <div
+          className={
+            pokemon.types.length > 1
+              ? `headerLeft-component ${pokemon.types
+                  .map((el) => el.type.name)
+                  .join("-")}`
+              : `headerLeft-component ${pokemon.types.map(
+                  (el) => el.type.name
+                )}`
+          }
+        >
           <img className="modal-image" src={image} alt={id}></img>
         </div>
         <div className="headerRight-component">
           <div className="modal-header-title">
-            <h2>
-              <strong>{name.toUpperCase()}</strong>
-            </h2>
+            <h2>{name.toUpperCase()}</h2>
             <hr />
-            <h2>
-              <p>{id > 9 ? `0${id}` : `00${id}`}</p>
-            </h2>
+            <p>{id > 9 ? `0${id}` : `00${id}`}</p>
+            <hr />
             <div className="header-button">
-              <button>
+              <button className="arrow">
                 <AiOutlineArrowLeft />
               </button>
               <button
@@ -68,13 +114,14 @@ const PokemonModal = ({
               >
                 X
               </button>
-              <button>
+              <button className="arrow">
                 <AiOutlineArrowRight />
               </button>
             </div>
           </div>
           <div className="description">
             <span>{description}</span>
+            <p>read more</p>
           </div>
         </div>
       </Modal.Header>
@@ -115,94 +162,30 @@ const PokemonModal = ({
           <li className="weak-against">
             <strong>Weak Against</strong>
             <p>
-              <span className="fighting">Fighting</span>
-              <span className="ground">Ground</span>
-              <span className="steel">Steel</span>
-              <span className="water">Water</span>
-              <span className="grass">Grass</span>
+              {weakList.map((element, index) => (
+                <span key={index} className={element.name}>
+                  {element.name}
+                </span>
+              ))}
             </p>
           </li>
+          <li></li>
         </div>
         <div className="stat-container">
           <h5>Stats</h5>
-          <div className="stat-list">
-            <ul>
-              <li>
-                <span>HP</span>
-                <div className="bar-stat">
-                  <div className="stats hp-stats">78</div>
-                </div>
-              </li>
-              <li>
-                <span>Attack</span>
-                <div className="bar-stat">
-                  <div className="stats attack-stats">84</div>
-                </div>
-              </li>
-              <li>
-                <span>Defense</span>
-                <div className="bar-stat">
-                  <div className="stats defense-stats">78</div>
-                </div>
-              </li>
-              <li>
-                <span>Speed</span>
-                <div className="bar-stat">
-                  <div className="stats speed-stats">100</div>
-                </div>
-              </li>
-              <li>
-                <span>Sp.Attack</span>
-                <div className="bar-stat">
-                  <div className="stats spattack-stats">109</div>
-                </div>
-              </li>
-              <li>
-                <span>Sp.Def</span>
-                <div className="bar-stat">
-                  <div className="stats def-stats">85</div>
-                </div>
-              </li>
-            </ul>
-          </div>
+          {stats.map((el) => (
+            <div className="stat-list">
+              <span>
+                {el.stat.name.charAt(0).toUpperCase() + el.stat.name.slice(1)}
+              </span>
+              <Progress done={el.base_stat} />
+            </div>
+          ))}
         </div>
-        <div className="evolution-container">
-          <h5>Evolution Chain </h5>
-          <div className="evolution-card">
-            <div className="modal-card">
-              <img className="card-img-top" src={image} alt={id} />
-              <div className="card-body">
-                <p className="card-text">
-                  <strong>{name}</strong>
-                </p>
-                <p className="card-text">{id}</p>
-              </div>
-            </div>
-            <span className="arrow-icon">
-              <AiOutlineArrowRight />
-            </span>
-            <div className="modal-card">
-              <img className="card-img-top" src={image} alt={id} />
-              <div className="card-body">
-                <p className="card-text">
-                  <strong>{name}</strong>
-                </p>
-                <p className="card-text">{id}</p>
-              </div>
-            </div>
-            <span className="arrow-icon">
-              <AiOutlineArrowRight />
-            </span>
-            <div className="modal-card">
-              <img className="card-img-top" src={image} alt={id} />
-              <div className="card-body">
-                <p className="card-text">
-                  <strong>{name}</strong>
-                </p>
-                <p className="card-text">{id}</p>
-              </div>
-            </div>
-          </div>
+        <div>
+          {evolutionSpecies.length > 0 && (
+            <EvolutionCard evolutionSpecies={evolutionSpecies} />
+          )}
         </div>
       </Modal.Body>
     </div>

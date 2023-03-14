@@ -13,6 +13,16 @@
     color: black;
 }
 
+.card-text{
+   font-weight: 600;
+   font-size: 20px;
+}
+
+.card-text-id {
+    font-weight: 400;
+    font-size: 20px;
+}
+
 .modal-content {
     background-color: #DEEDED !important;
 }
@@ -28,14 +38,20 @@
 }
 
 .modal-header-title h2 {
-    font-size: 26px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.modal-header-title p {
+    font-size: 30px;
+    font-weight: 400;
 }
 
 .modal-header-title hr {
-    border: 1px solid black !important;
+    border: 1px solid #5D5F7E !important;
     opacity: 1;
-    margin: 0 5%;
-    height:36px;
+    margin: 0 23px;
+    height:53px;
 }
 
 .modal-header-title button{
@@ -44,20 +60,22 @@
    border-radius: 50%;
    width:30px;
    height:30px;
-   margin-right:20px;
+   margin-right:15px;
 }
 
 .header-button{
     position: absolute;
-    right:30px;
+    right:25px;
+    top:50px;
 }
 
 .modal-body {
     margin: 0px !important;
+    padding: 0 !important;
 }
 
 .modal-container {
-    padding: 25px!important;
+    padding: 41px!important;
 }
 
 .stat-container li {
@@ -75,16 +93,17 @@
     margin: 40px !important;
 }
 
-.stat-container ul {
-    padding-left: 0px;
-    margin-bottom: 0px;
-}
 
 .attribute-container {
     display: flex;
     justify-content: space-between;
     flex-flow: wrap;
 }
+.attribute-container strong,
+.attribute-container p{
+    font-size: 16px;
+}
+
 
 .attribute-container li{
     list-style: none;
@@ -93,40 +112,33 @@
 }
 
 .attribute-container p{
-  margin-top: 1rem
+  margin-top: 5px;
+  margin-bottom: 0px !important;
 }
 
-
-.bar-stat {
-    width: 100%;
-    background-color: #93B2B2;
+.progress {
+    background-color: #d8d8d8;
+    height: 27%;
+    width: 60%;
+    margin-right: 2%;
 }
 
-.stats {
-    background-color: #2E3156;
-    color: white;
-    text-align: center;
+.progress-done {
+    background: #2e3156;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    transition: 1s ease 0.3s;
 }
 
-.hp-stats,
-.defense-stats {
-    width: 78%;
-}
-
-.attack-stats {
-    width: 84%
-}
-
-.spattack-stats {
-    width: 100%
-}
-
-.def-stats {
-    width: 85%
-}
-
-.speed-stats {
-    width: 100%
+.stat-list{
+    width:50%;
+    display: inline-flex;
+    justify-content: space-between;
 }
 
 .weak-against span {
@@ -150,17 +162,34 @@
 
 .modal-header {
     border: none !important;
+    padding: 0 !important;
+    margin-bottom: 50px;
 }
 
 .headerLeft-component img {
     padding: 30px 25px;
+    width: 199px;
+    height:277px;
+    border: 1px dashed #2E3156;
+    border-radius: 8px;
+}
+
+.headerLeft-component{
+   margin-right: 43px;
+   border-radius: 8px;
 }
 
 .description {
     border-radius: 4px;
     height: 62%;
     width: 100%;
-    padding: 5% 0% ;
+    padding-top: 30px ;
+}
+
+.description p{
+    text-decoration: underline;
+    font-weight:700;
+    font-size: 18px;
 }
 
 .description span{
@@ -171,21 +200,111 @@
     -webkit-box-orient: vertical;
     white-space: normal;
     text-align: justify;
+    font-size: 16px;
+}
+
+.evolution-container li{
+    list-style: none;
+}
+
+.evolution-container ul{
+  padding-left: 0px;
+}
+
+.evolution-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.evolution-card{
+   width:156px;
+   border: 1px dashed #2E3156;
+   border-radius: 8px;
+   text-align: center;
+   align-items: center;
+   height:216px;
+   padding: 20px;
+}
+
+.evolution-container svg {
+    margin-top: 10%;
+}
+
+.evolution-container svg:last-child {
+    display: none;
+}
+
+.evolution-container p,
+.evolution p{
+    font-size: 20px;
 }
 
 @media only screen and (max-width: 600px) {
 
     .headerLeft-component,
     .modal-container {
-        padding: 0;
+        padding: 0 !important;
     }
 
-    .modal-header {
-        display: block !important;
+    .modal-header-title{
+        display: block;
+    }
+     
+    .modal-header-title hr{
+       display: none;
     }
 
-    .attribute-container {
-        display: flex;
+    #card {
+      width: 158px !important;
+    }
 
+    .modal-content{
+        padding: 20px;
+    }
+
+    .stat-list{
+        display: block;
+        width:100%;
+        margin-bottom: 10px;
+    }
+
+    .progress{
+        width:100%
+    }
+
+    .evolution-card {
+        width: 100px !important;
+        padding: 5px !important;
+        height: 117px !important;
+    }
+    
+    .evolution-container svg {
+        margin: 0 5px;
+    }
+    
+    .evolution-container p {
+        display: none;
+    }
+
+    .description{
+        padding-top: 20px;
+    }
+
+    .description span{
+        -webkit-line-clamp: 4;
+    }
+
+    .arrow{
+        display: none;
+    }
+
+    .modal-header-title h2,
+    .modal-header-title p{
+        font-size: 18px;
+    }
+
+    .header-button {
+        right: 15px;
+        top: 15px;
     }
 }

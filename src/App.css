@@ -1,11 +1,7 @@
 body{
     background-color: #DEEDED !important;
-    margin: 4% !important;
+    margin: 50px !important;
     box-sizing: border-box;
-}
-
-h1, h2, h3, h4, h5, h6{
-    margin: 1%
 }
 
 .normal {
@@ -84,21 +80,25 @@ h1, h2, h3, h4, h5, h6{
     background-color: #CACACA;
 }
 
-.modal-card {
-    width: 156px;
-    height: 216px;
-    border: 1px dashed !important;
-    text-align: center;
-    border-radius: 8px;
-    padding: 15px;
+.grass-poison {
+    background-image: linear-gradient(#c0d4c8, #cfb7ed);
 }
 
-.evolution-card {
-    display: flex;
+.fire-flying {
+    background-image: linear-gradient(#edc2c4, #b2d2e8);
 }
 
-.arrow-icon {
-    font-size: 30px;
-    color: #2E3156;
-    margin: 60px;
+.bug-flying {
+    background-image: linear-gradient(#c1e0c8, #b2d2e8);
 }
+
+.bug-poison {
+    background-image: linear-gradient(#c1e0c8, #cfb7ed);
+}
+
+.normal-flying {
+    background-image: linear-gradient(#ddcbd0, #b2d2e8);
+}
+
+
+

@@ -47,13 +47,8 @@ const Home = () => {
           return (
             <>
               <PokemonCard
-                key={list.data.name}
+                key={list.data.id}
                 pokemon={list.data}
-                type={list.data.types.map((typeList) => {
-                  return (
-                    typeList.type.name
-                  );
-                })}
               />
             </>
           );

@@ -1,5 +1,7 @@
 import React from 'react';
 import "./Header.css";
+import { BsFillCaretDownFill } from "react-icons/bs";
+import { GrSearch } from "react-icons/gr"
 
 function Header({filterPokemon}) {
   const strengthDropdown = (e) =>{
@@ -26,7 +28,7 @@ function Header({filterPokemon}) {
       <div className="header-two">
         <div className="header-two-left">
           <div className="search-container" data-testid="app-search">
-            <form onChange={(e) => filterPokemon(e.target.value)} role={"form"}>
+            <form role={"form"}>
               <label htmlFor="search"> Search by</label>
               <br />
               <input
@@ -34,7 +36,9 @@ function Header({filterPokemon}) {
                 id="search-text"
                 placeholder="Name or Number"
                 aria-label="Search with name or number"
+                onChange={(e) => filterPokemon(e.target.value)}
               />
+              <GrSearch />
             </form>
           </div>
         </div>
@@ -49,6 +53,7 @@ function Header({filterPokemon}) {
                 onClick={(e) => strengthDropdown(e.target.value)}
               >
                 Noraml <strong>+ 5 More</strong>
+                <BsFillCaretDownFill />
               </button>
             </form>
             <div id="strength-content">
@@ -117,6 +122,7 @@ function Header({filterPokemon}) {
             <br />
             <button id="gender-button">
               Male <strong>+ 2 More</strong>
+              <BsFillCaretDownFill />
             </button>
           </div>
           <div className="stat-filter">
@@ -124,6 +130,7 @@ function Header({filterPokemon}) {
             <br />
             <button id="stat-button">
               HP <strong>+ 5 More</strong>
+              <BsFillCaretDownFill />
             </button>
           </div>
         </div>

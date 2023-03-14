@@ -3,7 +3,7 @@ import './style.css';
 import { Modal } from "react-bootstrap";
 import PokemonModal from "../Pokemon/PokemonModal";
 
-function PokemonCard({ pokemon, type}) {
+function PokemonCard({ pokemon }) {
   const [show, setShow] = useState(false);
 
   const handleShow = (e) => setShow(true);
@@ -12,7 +12,7 @@ function PokemonCard({ pokemon, type}) {
   return (
     <>
       <div
-        className={type}
+        className={pokemon.types.length > 1 ? `${pokemon.types.map((el)=> el.type.name).join("-")}` : `${pokemon.types.map((el)=> el.type.name)}`}
         onClick={(e) => handleShow(e.target.value)}
         id="card"
         data-testid="card"
@@ -21,15 +21,15 @@ function PokemonCard({ pokemon, type}) {
           className="card-img-top"
           src={pokemon.sprites.front_default}
           alt={pokemon.id}
-          data-testid = "card-image"
+          data-testid="card-image"
         />
         <div className="card-body">
           <p className="card-text">
-            <strong>
-              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </strong>
+            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
           </p>
-          <p className="card-text">{pokemon.id > 9 ? `0${pokemon.id}` : `00${pokemon.id}`}</p>
+          <p className="card-text-id">
+            {pokemon.id > 9 ? `0${pokemon.id}` : `00${pokemon.id}`}
+          </p>
         </div>
       </div>
       <Modal
@@ -39,23 +39,25 @@ function PokemonCard({ pokemon, type}) {
         className="modal-container"
       >
         <PokemonModal
-          close= {()=> {handleClose()}}
+          close={() => {
+            handleClose();
+          }}
+          pokemon={pokemon}
           key={pokemon.id}
           id={pokemon.id}
           name={pokemon.name}
           image={pokemon.sprites.front_default}
           height={pokemon.weight}
           weight={pokemon.weight}
-          abilities={pokemon.abilities.map((abilitiesList, index) => {
-            return <span key="index">{abilitiesList.ability.name}</span>;
-          })}
-          types={pokemon.types.map((typeList) => {
-            return (
-              <span key={typeList.type.name} className={typeList.type.name}>
-                {typeList.type.name}
-              </span>
-            );
-          })}
+          abilities={pokemon.abilities
+            .map((abilitiesList) => abilitiesList.ability.name)
+            .join(", ")}
+          types={pokemon.types.map((typeList) => (
+            <span key={typeList.type.name} className={typeList.type.name}>
+              {typeList.type.name}
+            </span>
+          ))}
+          stats={pokemon.stats.map((stat) => stat)}
         />
       </Modal>
     </>
